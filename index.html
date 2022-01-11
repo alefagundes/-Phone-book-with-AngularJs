@@ -35,6 +35,7 @@
 
     </style>
     <script src="./lib/angular/angular.js"></script>
+    <script src="./lib/angular/angular-location.js"></script>
     <link src="//code.angularjs.org/X.Y.Z/angular-messages.js"></link>
     <script>
         angular.module("listaTelefonica", []);
@@ -48,11 +49,11 @@
            ];
 
             $scope.operadoras = [
-                {nome:"Oi", codigo: 14, categoria:"Celular"},
-                {nome:"Vivo", codigo:1, categoria:"Celular"},
-                {nome:"tim", codigo:41, categoria:"Celular"},
-                {nome:"Embratel", codigo:25, categoria:"Fixo"},
-                {nome:"GVT", codigo:21, categoria:"Fixo"}
+                {nome:"Oi", codigo: 14, categoria:"Celular", preco:2},
+                {nome:"Vivo", codigo:1, categoria:"Celular", preco:4},
+                {nome:"tim", codigo:41, categoria:"Celular", preco:3},
+                {nome:"Embratel", codigo:25, categoria:"Fixo", preco:2},
+                {nome:"GVT", codigo:21, categoria:"Fixo", preco:1}
             ];
 
            $scope.adcionarContato = function (contato){
@@ -104,7 +105,7 @@
             <form name="contatoForm">
                 <input type="text" class="form-control" ng-model="contato.nome" name="nome" placeholder="Nome:" ng-required="true" ng-minlength="10"/>
                 <input type="text" class="form-control" ng-model="contato.telefone" placeholder="Telefone:" ng-required="true" name="telefone" ng-minlength="10" ng-pattern="/^\d{4,5}-\d{4}$/"/>
-                <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras | orderBy: 'nome'">
+                <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome + ' - ' + (operadora.preco | currency) + '/min'  group by operadora.categoria for operadora in operadoras | orderBy: 'nome'">
                 <option value="">Selecione uma Operadora</option>
                 </select>
             </form>
