@@ -86,12 +86,12 @@
         <table ng-show="contatos.length > 0" class="table">
             <tr>
                 <th></th>
-                <th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
-                <th><a href="" ng-click="ordenarPor('telefone')">Telefone</a></th>
+                <th>Nome</th>
+                <th>Telefone</th>
                 <th>Operadora</th>
                 <th>Data</th>
             </tr>
-            <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter: {nome: criterioDeBusca} | orderBy: criterioDeOrdenacao: direcaoDaOrdenacao">
+            <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter: {nome: criterioDeBusca}>
                 <td><input type="checkbox" ng-model="contato.selecionado"></td>
                 <td>{{contato.nome | uppercase}}</td>
                 <td>{{contato.telefone}}</td>
