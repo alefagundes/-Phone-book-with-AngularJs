@@ -39,11 +39,11 @@
     <link src="//code.angularjs.org/X.Y.Z/angular-messages.js"></link>
     <script>
         angular.module("listaTelefonica", []);
-        angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope){
+        angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, $filter){
            
             $scope.app = "Lista Telefonica";
            $scope.contatos = [
-               {nome:"alessandro", telefone:"995404669", date: new Date(), operadora:{nome:"Oi", codigo: 14, categoria:"Celular"}},
+               {nome:$filter('uppercase')("alessandro"), telefone:"995404669", date: new Date(), operadora:{nome:"Oi", codigo: 14, categoria:"Celular"}},
                {nome:"sirlei", telefone:"998703974", date: new Date(), operadora:{nome:"Vivo", codigo:1, categoria:"Celular"}},
                 {nome:"alexandre", telefone:"995500627", date: new Date(), operadora:{nome:"tim", codigo:41, categoria:"Celular"}}
            ];
@@ -94,9 +94,9 @@
             </tr>
             <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter: {nome: criterioDeBusca} | orderBy: criterioDeOrdenacao: direcaoDaOrdenacao">
                 <td><input type="checkbox" ng-model="contato.selecionado"></td>
-                <td>{{contato.nome | uppercase}}</td>
+                <td>{{contato.nome}}</td>
                 <td>{{contato.telefone}}</td>
-                <td>{{contato.operadora.nome | lowercase}}</td>
+                <td>{{contato.operadora.nome | uppercase}}</td>
                 <td>{{contato.date | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td><div style="width: 20px; height:20px;" ng-style="{'background-color': contato.cor}"></div></td>
             </tr>
@@ -124,7 +124,7 @@
             </div>
                 <button class="btn btn-primary btn-block" id="btn1" ng-click="adcionarContato(contato)" ng-disabled="contatoForm.$invalid">Adcionar Contato</button>
                 <button class="btn btn-danger btn-block" id="btn2" ng-click="apagarContatos(contatos)" ng-if="isContatoSelecionado(contatos)">Apagar Contato</button>
-    </div>
+            </div>
     <!--Apply the subject about tag (ng-include)-->
    <div ng-include="'footer.html'"></div>
 </body>
